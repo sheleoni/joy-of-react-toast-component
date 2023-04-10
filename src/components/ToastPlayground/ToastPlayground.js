@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from '../Button';
+import Toast from '../Toast'
 
 import styles from './ToastPlayground.module.css';
 
@@ -9,6 +10,8 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 function ToastPlayground() {
 
   const [variant, setVariant] = React.useState('')
+  const [message, setMessage] = React.useState('')
+  const [isToastVisible, setIsToastVisible] = React.useState(false)
 
   return (
     <div className={styles.wrapper}>
@@ -17,6 +20,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
+      {isToastVisible && <Toast variant={variant} message={message} setIsToastVisible={setIsToastVisible}/>}
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
@@ -27,7 +31,7 @@ function ToastPlayground() {
             Message
           </label>
           <div className={styles.inputWrapper}>
-            <textarea id="message" className={styles.messageInput} />
+            <textarea id="message" className={styles.messageInput} value={message} onChange={event => setMessage(event.target.value)}/>
           </div>
         </div>
 
@@ -37,7 +41,7 @@ function ToastPlayground() {
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
             {VARIANT_OPTIONS.map((item) => {
-              return (<>
+              return (
                 <label htmlFor={`variant-${item}`} key={`variant-${item}`}>
                   <input
                       id={`variant-${item}`}
@@ -48,7 +52,7 @@ function ToastPlayground() {
                   />
                   {item}
                 </label>
-                </>)
+                )
             })}
 
             {/* TODO Other Variant radio buttons here */}
@@ -60,7 +64,7 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => setIsToastVisible(true)}>Pop Toast!</Button>
           </div>
         </div>
       </div>
