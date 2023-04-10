@@ -7,6 +7,9 @@ import styles from './ToastPlayground.module.css';
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
+
+  const [variant, setVariant] = React.useState('')
+
   return (
     <div className={styles.wrapper}>
       <header>
@@ -33,15 +36,20 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <label htmlFor="variant-notice">
-              <input
-                id="variant-notice"
-                type="radio"
-                name="variant"
-                value="notice"
-              />
-              notice
-            </label>
+            {VARIANT_OPTIONS.map((item) => {
+              return (<>
+                <label htmlFor={`variant-${item}`} key={`variant-${item}`}>
+                  <input
+                      id={`variant-${item}`}
+                      type="radio"
+                      name="variant"
+                      value={item}
+                      onChange={event => setVariant(event.target.value)}
+                  />
+                  {item}
+                </label>
+                </>)
+            })}
 
             {/* TODO Other Variant radio buttons here */}
           </div>
