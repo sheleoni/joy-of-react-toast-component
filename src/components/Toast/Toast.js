@@ -43,13 +43,15 @@ function Toast({variant, messages, setMessages, messageID, children}) {
                 {Icon && <Icon/>}
             </div>
             <p className={styles.content}>
+                <VisuallyHidden>
+                    {variant} -
+                </VisuallyHidden>
                 {children}
             </p>
-            <button className={styles.closeButton}>
+            <button className={styles.closeButton} aria-label="Dismiss message" aria-live="off">
                 <X size={24} onClick={() => {
                     handleDeleteItem(messageID)
                 }}/>
-                <VisuallyHidden>Dismiss message</VisuallyHidden>
             </button>
         </div>
     );
