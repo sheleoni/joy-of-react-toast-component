@@ -1,10 +1,9 @@
 import React from 'react';
 
 import Button from '../Button';
-import Toast from '../Toast';
 import ToastShelf from "../ToastShelf";
 import styles from './ToastPlayground.module.css';
-import ToastProvider, {ToastContext} from "../ToastProvider";
+import {ToastContext} from "../ToastProvider";
 import useEscapeKey from "../../hooks/use-escape-key";
 
 function ToastPlayground() {
@@ -15,8 +14,6 @@ function ToastPlayground() {
         setVariant,
         newMessage,
         setNewMessage,
-        isToastVisible,
-        setIsToastVisible,
         messages,
         setMessages,
         VARIANT_OPTIONS

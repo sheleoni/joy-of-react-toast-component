@@ -14,7 +14,7 @@ function useEscapeKey(callback) {
         return (() => {
             document.removeEventListener('keydown', handleEscapeKey)
         })
-    }, [])
+    }, [callback])
 
 }
 
