@@ -21,6 +21,22 @@ function ToastPlayground() {
         VARIANT_OPTIONS
     } = React.useContext(ToastContext);
 
+    const [showToastShelf, setShowToastShelf] = React.useState(true);
+
+    React.useEffect(() => {
+        function handleEscapeKey(event) {
+            if (event.key === 'Escape') {
+                setShowToastShelf(false);
+            }
+        }
+
+        document.addEventListener('keydown', handleEscapeKey)
+
+        return (() => {
+            document.removeEventListener('keydown', handleEscapeKey)
+        })
+    }, [])
+
     return (
         <>
             <div className={styles.wrapper}>
@@ -29,13 +45,15 @@ function ToastPlayground() {
                     <h1>Toast Playground</h1>
                 </header>
 
-                {isToastVisible && <Toast variant={variant} setIsToastVisible={setIsToastVisible}/>}
-                <ToastShelf messages={messages} setMessages={setMessages}/>
+                {/* press escape key to "hide the ToastShelf" */}
+                {showToastShelf && <ToastShelf messages={messages} setMessages={setMessages}/>}
 
                 <form className={styles.controlsWrapper}
                       onSubmit={(event) => {
-                          event.preventDefault()
+                          event.preventDefault();
                           handleSubmit();
+                          // re-show toasts when user submits a new toast
+                          setShowToastShelf(true);
                       }}>
                     <div className={styles.row}>
                         <label
