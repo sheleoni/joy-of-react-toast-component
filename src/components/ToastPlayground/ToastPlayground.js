@@ -5,6 +5,7 @@ import Toast from '../Toast';
 import ToastShelf from "../ToastShelf";
 import styles from './ToastPlayground.module.css';
 import ToastProvider, {ToastContext} from "../ToastProvider";
+import useEscapeKey from "../../hooks/use-escape-key";
 
 function ToastPlayground() {
 
@@ -23,19 +24,9 @@ function ToastPlayground() {
 
     const [showToastShelf, setShowToastShelf] = React.useState(true);
 
-    React.useEffect(() => {
-        function handleEscapeKey(event) {
-            if (event.key === 'Escape') {
-                setShowToastShelf(false);
-            }
-        }
-
-        document.addEventListener('keydown', handleEscapeKey)
-
-        return (() => {
-            document.removeEventListener('keydown', handleEscapeKey)
-        })
-    }, [])
+    useEscapeKey(() => {
+        setShowToastShelf(false)
+    })
 
     return (
         <>
