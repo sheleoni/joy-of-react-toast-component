@@ -19,15 +19,7 @@ const ICONS_BY_VARIANT = {
 };
 
 function Toast({variant, messages, setMessages, messageID, children}) {
-
-    function handleAddItem(newMessage) {
-        const {variant, id, message} = newMessage
-        const newMessages = [...messages,
-            {variant, id, message}
-        ]
-        setMessages(newMessages);
-    }
-
+    
     function handleDeleteItem(itemID) {
         const newMessages = messages.filter(
             (item) => item.id !== itemID
